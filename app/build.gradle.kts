@@ -47,4 +47,10 @@ dependencies {
     implementation (libs.poi.ooxml)
     implementation(libs.picasso)
 
+
+    implementation (libs.lottie.v666)
+
+
+
+
 }

@@ -2,14 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-
-
 
     <application
         android:allowBackup="true"
@@ -21,36 +19,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InventoryManager"
         tools:targetApi="31">
-
-        <!-- Activities -->
         <activity
-            android:name=".UI.ProductViewActivity"
-            android:exported="false" >
-        </activity>
-
-
-
-
-        <activity
-            android:name=".UI.SubCatagoryActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".UI.SplashScreen"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Broadcast Receiver -->
+        <!-- Activities -->
+        <activity
+            android:name=".UI.ProductViewActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".UI.SubCatagoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
+        </activity> <!-- Broadcast Receiver -->
         <receiver
             android:name=".Helper.LowStockReceiver"
             android:enabled="true"
             android:exported="true" />
-
-
-
     </application>
+
 </manifest>
