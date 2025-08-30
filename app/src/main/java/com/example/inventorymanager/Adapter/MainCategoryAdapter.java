@@ -77,35 +77,6 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
         return filteredList.size();
     }
 
-//    @Override
-//    public Filter getFilter() {
-//        return new Filter() {
-//            @Override
-//            protected FilterResults performFiltering(CharSequence constraint) {
-//                List<MainCategory> filtered = new ArrayList<>();
-//                if (constraint == null || constraint.length() == 0) {
-//                    filtered.addAll(fullList);
-//                } else {
-//                    String query = constraint.toString().toLowerCase();
-//                    for (MainCategory item : fullList) {
-//                        if (item.getName().toLowerCase().contains(query)) {
-//                            filtered.add(item);
-//                        }
-//                    }
-//                }
-//                FilterResults results = new FilterResults();
-//                results.values = filtered;
-//                return results;
-//            }
-//
-//            @Override
-//            protected void publishResults(CharSequence constraint, FilterResults results) {
-//                filteredList.clear();
-//                filteredList.addAll((List) results.values);
-//                notifyDataSetChanged();
-//            }
-//        };
-//    }
 
 
 

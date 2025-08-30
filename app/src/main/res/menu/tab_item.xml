@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <item
+        android:id="@+id/main_catagory"
+        android:icon="@drawable/home"
+        android:title="Main Catagory"
+        android:checkable="true"
+        />
+
+    <item
+        android:id="@+id/sub_catagory"
+        android:icon="@drawable/home"
+        android:title="Sub Catagory"
+        android:checkable="true"
+        />
+
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/notification"
+        android:iconTintMode="multiply"
+        android:title="Notification"
+        android:checkable="true"
+        />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings"
+        android:title="Settings"
+        android:checkable="true"
+        />
+
+
+
+</menu>

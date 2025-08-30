@@ -20,25 +20,26 @@
         android:theme="@style/Theme.InventoryManager"
         tools:targetApi="31">
         <activity
+            android:name=".UI.AppBody"
+            android:exported="false" />
+        <activity
             android:name=".UI.SplashScreen"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- Activities -->
+        </activity> <!-- Activities -->
         <activity
             android:name=".UI.ProductViewActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".UI.SubCatagoryActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity> <!-- Broadcast Receiver -->
+            android:exported="false"></activity> <!-- Broadcast Receiver -->
         <receiver
             android:name=".Helper.LowStockReceiver"
             android:enabled="true"
