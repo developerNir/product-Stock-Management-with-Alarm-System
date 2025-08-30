@@ -73,6 +73,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM SubCategory WHERE mainCatId=?", new String[]{String.valueOf(mainCatId)});
     }
 
+    public Cursor getAllSubCategories() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM SubCategory", null);
+    }
+
     public boolean updateSubCategory(int id, String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();

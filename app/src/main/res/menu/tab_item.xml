@@ -19,6 +19,13 @@
         />
 
     <item
+        android:id="@+id/all_product"
+        android:icon="@drawable/home"
+        android:title="All Products"
+        android:checkable="true"
+        />
+
+    <item
         android:id="@+id/notification"
         android:icon="@drawable/notification"
         android:iconTintMode="multiply"

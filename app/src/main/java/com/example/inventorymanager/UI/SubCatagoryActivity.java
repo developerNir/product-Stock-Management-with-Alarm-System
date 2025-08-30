@@ -1,10 +1,13 @@
 package com.example.inventorymanager.UI;
 
+import static com.example.inventorymanager.R.drawable.button_bg_orange;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -170,23 +173,48 @@ public class SubCatagoryActivity extends AppCompatActivity {
         });
 
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-        builder.show();
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.background);
+        Button positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button negative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+
+        positive.setTextColor(Color.WHITE);
+        input.setTextColor(Color.WHITE);
+
+        negative.setTextColor(Color.WHITE);
     }
 
 
 
     public void onDeletePupupDialog(DatabaseHelper db, SubCategory subCategory) {
-        new AlertDialog.Builder(SubCatagoryActivity.this)
+        AlertDialog dialog = new AlertDialog.Builder(SubCatagoryActivity.this)
                 .setTitle("Warning!")
                 .setMessage("Are you sure you want to delete \"" + subCategory.getName() + "\"?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton("Yes", (dialog, which) -> {
+                .setPositiveButton("Yes", (dialogg, which) -> {
                     db.deleteSubCategory(subCategory.getId());
                     loadSubCategories();
                     Toast.makeText(SubCatagoryActivity.this, "Deleted!", Toast.LENGTH_SHORT).show();
                 })
-                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .setNegativeButton("No", (dialogg, which) -> dialogg.dismiss())
                 .show();
+
+
+
+        // set custom background
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.background);
+
+
+        Button positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button negative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+
+        positive.setBackgroundResource(button_bg_orange);
+        positive.setTextColor(Color.WHITE);
+
+        negative.setBackgroundResource(button_bg_orange);
+        negative.setTextColor(Color.WHITE);
     }
 
 

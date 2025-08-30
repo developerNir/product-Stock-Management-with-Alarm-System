@@ -24,7 +24,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.inventorymanager.R;
+import com.example.inventorymanager.UI.Fragment.AllProudct;
 import com.example.inventorymanager.UI.Fragment.Home;
+import com.example.inventorymanager.UI.Fragment.NotificationPage;
+import com.example.inventorymanager.UI.Fragment.Settings;
+import com.example.inventorymanager.UI.Fragment.SubCatagoryItem;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -82,7 +86,16 @@ public class AppBody extends AppCompatActivity {
                   fragmentReplace(new Home());
                   drawerLayout.closeDrawer(START);
               } else if (item.getItemId()== R.id.sub_catagory) {
-                  fragmentReplace(new Home());
+                  fragmentReplace(new SubCatagoryItem());
+                  drawerLayout.closeDrawer(START);
+              } else if (item.getItemId() == R.id.all_product) {
+                  fragmentReplace(new AllProudct());
+                  drawerLayout.closeDrawer(START);
+              } else if (item.getItemId() == R.id.settings) {
+                  fragmentReplace(new Settings());
+                  drawerLayout.closeDrawer(START);
+              } else if (item.getItemId() == R.id.notification) {
+                  fragmentReplace(new NotificationPage());
                   drawerLayout.closeDrawer(START);
               }
               return true;
@@ -100,7 +113,16 @@ public class AppBody extends AppCompatActivity {
                     fragmentReplace(new Home());
                     drawerLayout.closeDrawer(START);
                 } else if (item.getItemId()== R.id.sub_catagory) {
-                    fragmentReplace(new Home());
+                    fragmentReplace(new SubCatagoryItem());
+                    drawerLayout.closeDrawer(START);
+                }else if (item.getItemId() == R.id.all_product) {
+                    fragmentReplace(new AllProudct());
+                    drawerLayout.closeDrawer(START);
+                } else if (item.getItemId() == R.id.settings) {
+                    fragmentReplace(new Settings());
+                    drawerLayout.closeDrawer(START);
+                } else if (item.getItemId() == R.id.notification) {
+                    fragmentReplace(new NotificationPage());
                     drawerLayout.closeDrawer(START);
                 }
 
