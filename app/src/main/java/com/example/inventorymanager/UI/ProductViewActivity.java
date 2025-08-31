@@ -1,5 +1,7 @@
 package com.example.inventorymanager.UI;
 
+import static android.view.View.GONE;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -18,12 +20,15 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -37,6 +42,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.inventorymanager.Adapter.ProductAdapter;
 import com.example.inventorymanager.Database.DatabaseHelper;
 import com.example.inventorymanager.Model.ProductModel;
@@ -55,10 +61,12 @@ import java.util.List;
 public class ProductViewActivity extends AppCompatActivity {
 
 
-    private static final int PICK_IMAGE_REQUEST = 4 ;
+    private static final int PICK_IMAGE_REQUEST = 101 ;
     RecyclerView recyclerProducts;
     FloatingActionButton btnAddProduct, showSettings;
 
+    TextView text_notfound;
+    LottieAnimationView lottieAnimation;
 
     List<ProductModel> productList = new ArrayList<>();
     ProductAdapter adapter;
@@ -92,13 +100,21 @@ public class ProductViewActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(this);
         subCatId = getIntent().getIntExtra("subId", -1);
-        showSettings = findViewById(R.id.showSettings);
+//        showSettings = findViewById(R.id.showSettings);
 
         recyclerProducts = findViewById(R.id.recyclerProducts);
         btnAddProduct = findViewById(R.id.btnAddProduct);
+        text_notfound = findViewById(R.id.text_notfound);
+        lottieAnimation = findViewById(R.id.lottieAnimation);
+
         recyclerProducts.setLayoutManager(new LinearLayoutManager(this));
 
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.orange)); // Your color
+        }
 
         SearchView searchView = findViewById(R.id.searchViewProduct);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -117,9 +133,9 @@ public class ProductViewActivity extends AppCompatActivity {
 
 
 
-        showSettings.setOnClickListener(v -> {
-            showSettingsDialog();
-        });
+//        showSettings.setOnClickListener(v -> {
+//            showSettingsDialog();
+//        });
 
 
         adapter = new ProductAdapter(this, productList, new ProductAdapter.OnProductClickListener() {
@@ -169,29 +185,6 @@ public class ProductViewActivity extends AppCompatActivity {
 
 
 
-//    private void loadProducts() {
-//        Cursor cursor = db.getProductsBySubCat(subCatId);
-//        List<ProductModel> tempList = new ArrayList<>();
-//        if (cursor.moveToFirst()) {
-//            do {
-//                @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
-//                @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("name"));
-//                @SuppressLint("Range") String img = cursor.getString(cursor.getColumnIndex("image"));
-//
-//
-//
-//                @SuppressLint("Range") String desc = cursor.getString(cursor.getColumnIndex("description"));
-//                @SuppressLint("Range") double price = cursor.getDouble(cursor.getColumnIndex("price"));
-//                @SuppressLint("Range") int qty = cursor.getInt(cursor.getColumnIndex("quantity"));
-//                @SuppressLint("Range") String stock = cursor.getString(cursor.getColumnIndex("stock"));
-//                tempList.add(new ProductModel(id, name, img, desc, price, qty, stock, subCatId));
-//
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//
-//        adapter.updateData(tempList); // refresh both fullList & filteredList
-//    }
 
 
     private void loadProducts() {
@@ -213,7 +206,23 @@ public class ProductViewActivity extends AppCompatActivity {
             } while (cursor.moveToNext());
         }
         cursor.close();
-        adapter.updateData(tempList);
+
+
+
+        // ✅ Toggle visibility
+        if (tempList.isEmpty()) {
+            recyclerProducts.setVisibility(GONE);
+            lottieAnimation.setVisibility(View.VISIBLE);
+            text_notfound.setVisibility(View.VISIBLE);
+            lottieAnimation.playAnimation(); // start animation
+        } else {
+            recyclerProducts.setVisibility(View.VISIBLE);
+            lottieAnimation.setVisibility(GONE);
+            text_notfound.setVisibility(GONE);
+            adapter.updateData(tempList);
+        }
+
+
     }
 
 
@@ -309,7 +318,6 @@ private void showProductDialog(boolean isEdit, ProductModel product) {
 
     DatabaseHelper db = new DatabaseHelper(this);
 
-    int PICK_IMAGE_REQUEST = 1;
 
 
 

@@ -32,10 +32,9 @@
                     android:id="@+id/toolbarApp"
                     app:title="Notify App"
                     app:titleTextColor="#000"
-                    app:navigationIcon="@drawable/three_dot_icon"
                     app:navigationIconTint="#000"
                     android:background="#FFC107"
-                    app:menu="@menu/tab_item"
+                    app:menu="@menu/toolbar_item"
                     />
 
             </com.google.android.material.appbar.AppBarLayout>

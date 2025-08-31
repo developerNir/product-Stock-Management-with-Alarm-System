@@ -3,12 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.Fragment.AllProudct">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".UI.ProductViewActivity"
+        android:orientation="vertical"
+        >
+
+
+        <SearchView
+            android:id="@+id/searchViewProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search by name..." />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+
+        <TextView
+            android:id="@+id/text_notfound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="কোনও আইটেম খুঁজে পাওয়া যায়নি"
+            android:textColor="@color/orange"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/lottieAnimation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimation"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/not_found"
+            tools:ignore="MissingConstraints" />
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerProducts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

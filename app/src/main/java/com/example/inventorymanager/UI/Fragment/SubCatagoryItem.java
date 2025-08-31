@@ -1,9 +1,13 @@
 package com.example.inventorymanager.UI.Fragment;
 
+import static android.view.View.GONE;
+import static com.example.inventorymanager.R.drawable.button_bg_orange;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -16,10 +20,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.inventorymanager.Adapter.SubCategoryAdapter;
 import com.example.inventorymanager.Database.DatabaseHelper;
 import com.example.inventorymanager.Model.SubCategory;
@@ -45,6 +52,9 @@ public class SubCatagoryItem extends Fragment {
 //    int mainCatId;
 
 
+    TextView text_notfound;
+    LottieAnimationView lottieAnimation;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +70,9 @@ public class SubCatagoryItem extends Fragment {
         btnAdd = view.findViewById(R.id.btnAddSubCategory);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         searchView = view.findViewById(R.id.searchViewsubCata);
+
+        text_notfound = view.findViewById(R.id.text_notfound);
+        lottieAnimation = view.findViewById(R.id.lottieAnimation);
 
 
         adapter = new SubCategoryAdapter(getContext(), subCategoryList, new SubCategoryAdapter.OnItemActionListener() {
@@ -135,7 +148,20 @@ public class SubCatagoryItem extends Fragment {
         cursor.close();
 
 
-        adapter.updateList(list); // update adapter, this keeps filteredList synced
+
+        // ✅ Toggle visibility
+        if (list.isEmpty()) {
+            recyclerView.setVisibility(GONE);
+            lottieAnimation.setVisibility(View.VISIBLE);
+            text_notfound.setVisibility(View.VISIBLE);
+            lottieAnimation.playAnimation(); // start animation
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            lottieAnimation.setVisibility(GONE);
+            text_notfound.setVisibility(GONE);
+            adapter.updateList(list);
+        }
+
     }
 
 
@@ -163,23 +189,54 @@ public class SubCatagoryItem extends Fragment {
         });
 
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-        builder.show();
+
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.background);
+        Button positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button negative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+
+        positive.setTextColor(Color.WHITE);
+        input.setTextColor(Color.WHITE);
+
+        negative.setTextColor(Color.WHITE);
+
+
+
     }
 
 
 
     public void onDeletePupupDialog(DatabaseHelper db, SubCategory subCategory) {
-        new AlertDialog.Builder(getContext())
+        AlertDialog dialog = new AlertDialog.Builder(getContext())
                 .setTitle("Warning!")
                 .setMessage("Are you sure you want to delete \"" + subCategory.getName() + "\"?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton("Yes", (dialog, which) -> {
+                .setPositiveButton("Yes", (dialogg, which) -> {
                     db.deleteSubCategory(subCategory.getId());
                     loadSubCategories();
                     Toast.makeText(getContext(), "Deleted!", Toast.LENGTH_SHORT).show();
                 })
-                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .setNegativeButton("No", (dialogg, which) -> dialogg.dismiss())
                 .show();
+
+
+
+// set custom background
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.background);
+
+
+        Button positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button negative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+
+        positive.setBackgroundResource(button_bg_orange);
+        positive.setTextColor(Color.WHITE);
+
+        negative.setBackgroundResource(button_bg_orange);
+        negative.setTextColor(Color.WHITE);
     }
 
 

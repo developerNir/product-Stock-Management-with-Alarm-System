@@ -30,6 +30,34 @@
             android:layout_height="match_parent"
             >
 
+
+            <TextView
+                android:id="@+id/text_notfound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="কোনও আইটেম খুঁজে পাওয়া যায়নি"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/lottieAnimation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieAnimation"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/not_found"
+                tools:ignore="MissingConstraints" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewSubCategory"
                 android:layout_width="match_parent"
@@ -48,7 +76,7 @@
                 android:id="@+id/btnAddSubCategory"
                 android:src="@android:drawable/ic_input_add"
                 android:layout_margin="30dp"
-                app:layout_constraintBottom_toBottomOf="@+id/recyclerViewSubCategory"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
 

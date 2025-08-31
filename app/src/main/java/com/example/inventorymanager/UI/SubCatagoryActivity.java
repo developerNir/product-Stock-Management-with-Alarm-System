@@ -1,5 +1,6 @@
 package com.example.inventorymanager.UI;
 
+import static android.view.View.GONE;
 import static com.example.inventorymanager.R.drawable.button_bg_orange;
 
 import android.annotation.SuppressLint;
@@ -8,10 +9,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +33,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.inventorymanager.Adapter.SubCategoryAdapter;
 import com.example.inventorymanager.Database.DatabaseHelper;
 import com.example.inventorymanager.MainActivity;
@@ -52,6 +57,8 @@ public class SubCatagoryActivity extends AppCompatActivity {
     SearchView searchView;
     int mainCatId;
 
+    TextView text_notfound;
+    LottieAnimationView lottieAnimation;
 
 
     @SuppressLint("MissingInflatedId")
@@ -67,6 +74,14 @@ public class SubCatagoryActivity extends AppCompatActivity {
         });
 
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.orange)); // Your color
+        }
+
+
+
 
 
         db = new DatabaseHelper(this);
@@ -76,6 +91,9 @@ public class SubCatagoryActivity extends AppCompatActivity {
         btnAdd = findViewById(R.id.btnAddSubCategory);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         searchView = findViewById(R.id.searchViewsubCata);
+
+        text_notfound = findViewById(R.id.text_notfound);
+        lottieAnimation = findViewById(R.id.lottieAnimation);
 
         adapter = new SubCategoryAdapter(this, subCategoryList, new SubCategoryAdapter.OnItemActionListener() {
             @Override
@@ -145,7 +163,22 @@ public class SubCatagoryActivity extends AppCompatActivity {
         }
         cursor.close();
 
-        adapter.updateList(list); // update adapter, this keeps filteredList synced
+
+
+        // ✅ Toggle visibility
+        if (list.isEmpty()) {
+            recyclerView.setVisibility(GONE);
+            lottieAnimation.setVisibility(View.VISIBLE);
+            text_notfound.setVisibility(View.VISIBLE);
+            lottieAnimation.playAnimation(); // start animation
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            lottieAnimation.setVisibility(GONE);
+            text_notfound.setVisibility(GONE);
+            adapter.updateList(list);
+        }
+
+
     }
 
 

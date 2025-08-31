@@ -105,10 +105,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public Cursor getAllProducts() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM Products", null);
+    }
+
     public Cursor getProductsBySubCat(int subCatId) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM Products WHERE subCatId=?", new String[]{String.valueOf(subCatId)});
     }
+
+    // Get all products with quantity <= threshold (low stock)
+    public Cursor getLowStockProducts(int threshold) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT * FROM Products WHERE quantity <= ?",
+                new String[]{String.valueOf(threshold)}
+        );
+    }
+
 
     public boolean updateProduct(int id, String name, byte[] image, String description, double price, int quantity, String stock) {
         SQLiteDatabase db = this.getWritableDatabase();

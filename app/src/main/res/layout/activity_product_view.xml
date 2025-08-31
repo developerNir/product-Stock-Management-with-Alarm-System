@@ -19,6 +19,7 @@
 
 
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:orientation="vertical"
         android:padding="10dp"
@@ -37,17 +38,32 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/showSettings"
+        <TextView
+            android:id="@+id/text_notfound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:contentDescription="@string/app_name"
-            android:padding="20dp"
-            android:src="@android:drawable/ic_input_add"
+            android:text="কোনও আইটেম খুঁজে পাওয়া যায়নি"
+            android:textColor="@color/orange"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/lottieAnimation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimation"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/not_found"
+            tools:ignore="MissingConstraints" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerProducts"

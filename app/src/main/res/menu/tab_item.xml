@@ -4,6 +4,10 @@
 
     >
 
+    <group>
+
+
+
     <item
         android:id="@+id/main_catagory"
         android:icon="@drawable/home"
@@ -21,6 +25,7 @@
     <item
         android:id="@+id/all_product"
         android:icon="@drawable/home"
+        android:iconTintMode="src_atop"
         android:title="All Products"
         android:checkable="true"
         />
@@ -29,12 +34,14 @@
         android:id="@+id/notification"
         android:icon="@drawable/notification"
         android:iconTintMode="multiply"
-        android:title="Notification"
+        android:title="Low Stock Product"
         android:checkable="true"
         />
+    </group>
     <item
         android:id="@+id/settings"
         android:icon="@drawable/settings"
+        android:iconTintMode="src_over"
         android:title="Settings"
         android:checkable="true"
         />

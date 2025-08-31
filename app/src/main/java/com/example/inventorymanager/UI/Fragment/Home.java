@@ -1,7 +1,9 @@
 package com.example.inventorymanager.UI.Fragment;
 
+import static android.view.View.GONE;
 import static com.example.inventorymanager.R.drawable.button_bg_orange;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,8 +22,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.inventorymanager.Adapter.MainCategoryAdapter;
 import com.example.inventorymanager.Database.DatabaseHelper;
 import com.example.inventorymanager.MainActivity;
@@ -46,7 +50,11 @@ public class Home extends Fragment {
     FloatingActionButton btnAddCatagory;
     int updateId = -1;
 
+    TextView text_notfound;
+    LottieAnimationView lottieAnimation;
 
+
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,6 +72,8 @@ public class Home extends Fragment {
         searchView = view.findViewById(R.id.searchViewMainCatagory);
         btnAddCatagory =view.findViewById(R.id.btnAddCatagory);
 
+        text_notfound = view.findViewById(R.id.text_notfound);
+        lottieAnimation = view.findViewById(R.id.lottieAnimation);
 
         loadCategories();
 
@@ -127,7 +137,24 @@ public class Home extends Fragment {
             }
         });
 
-        recyclerView.setAdapter(adapter);
+
+
+
+        // ✅ Toggle visibility
+        if (list.isEmpty()) {
+            recyclerView.setVisibility(GONE);
+            lottieAnimation.setVisibility(View.VISIBLE);
+            text_notfound.setVisibility(View.VISIBLE);
+            lottieAnimation.playAnimation(); // start animation
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            lottieAnimation.setVisibility(GONE);
+            text_notfound.setVisibility(GONE);
+            recyclerView.setAdapter(adapter);
+        }
+
+
+
     }
 
 

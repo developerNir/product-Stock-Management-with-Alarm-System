@@ -13,48 +13,62 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <ImageView
-            android:id="@+id/ProductImage"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:scaleType="centerCrop"
-            android:src="@color/design_default_color_background"
-            android:background="@android:color/darker_gray"
-            android:contentDescription="Product Image" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           >
 
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Product Name"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#000000" />
+           <ImageView
+               android:id="@+id/ProductImage"
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:scaleType="centerCrop"
+               android:layout_marginEnd="15dp"
+               android:src="@color/design_default_color_background"
+               android:background="@android:color/darker_gray"
+               android:contentDescription="Product Image" />
 
-        <TextView
-            android:id="@+id/tvProductDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Product description"
-            android:textSize="14sp"
-            android:textColor="#000000" />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               >
+               <TextView
+                   android:id="@+id/tvProductName"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                   android:text="Product Name"
+                   android:textSize="18sp"
+                   android:textStyle="bold"
+                   android:textColor="#000000" />
 
-        <TextView
-            android:id="@+id/tvProductPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Price: $100"
-            android:textSize="16sp"
-            android:textColor="#444" />
+               <TextView
+                   android:id="@+id/tvProductDescription"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Product description"
+                   android:textSize="14sp"
+                   android:textColor="#000000" />
 
-        <TextView
-            android:id="@+id/tvProductStock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Stock: In Stock"
-            android:textSize="16sp"
-            android:textColor="#444" />
+               <TextView
+                   android:id="@+id/tvProductPrice"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Price: $100"
+                   android:textSize="16sp"
+                   android:textColor="#444" />
+
+               <TextView
+                   android:id="@+id/tvProductStock"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Stock: In Stock"
+                   android:textSize="16sp"
+                   android:textColor="#444" />
+           </LinearLayout>
+       </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,11 +98,13 @@
             <!-- Minus Button -->
             <ImageButton
                 android:id="@+id/btnMinus"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_media_previous"
-                android:tint="#EF5350"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/minus_sign"
                 android:contentDescription="Decrease Quantity" />
 
             <!-- Quantity Text -->
@@ -106,11 +122,13 @@
             <!-- Plus Button -->
             <ImageButton
                 android:id="@+id/btnPlus"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_input_add"
-                android:tint="#66BB6A"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/add"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
                 android:contentDescription="Increase Quantity" />
         </LinearLayout>
 
